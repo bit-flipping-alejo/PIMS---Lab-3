@@ -42,18 +42,23 @@ def halfRed():
 
 
 # Problem 2
-def moreRed():
+#Potential issues: if your new red value
+# is greater than max red val as dictated
+# by pixel depth thats an issue. As such
+# this fcn puts a cieling at 255
+# assuming 8 bit pixel depth for all
+# images
+def moreRed(percMore):
   pic = get_pic()
   pixels = getPixels(pic)
-  percentage = input("From 0-100, what percentage do you wish to increase the red pixel value: ")
-  p = 1+(percentage/100)
-  for x in pixels:
-    r = getRed(x)
-    newRed = r*p
-    if newRed > 255:
-      setRed(x, 255)
+  newPercTot = 1 + (percMore / 100.0)
+  for eachPix in pixels:
+    currPixRed = getRed(eachPix)
+    newRedVal = floor(currPixRed * newPercTot)
+    if (newRedVal > 255):
+      setRed(eachPix, 255)
     else:
-      setRed(x, newRed)
+      setRed(eachPix, newRedVal)
   repaint(pic)
     
 # Problem 3
